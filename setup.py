@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 setup(
     name='euclid',
     version='1.0.dev0',
-    
+
     py_modules=['euclid'],
 
     setup_requires=[
@@ -14,12 +14,12 @@ setup(
         'pytest',
     ],
 
-    author='Eugen Zagorodniy',
-    author_email='e.zagorodniy@gmail.com',
-    description='2D and 3D vector, matrix, quaternion and geometry module',
+    author='Thomas Waters',
+    author_email='twaters117@gmail.com',
+    description='2D and 3D vector, matrix, quaternion and geometry and graphics module',
     license='LGPLv2+',
     keywords=['geometry'],
-    url='https://github.com/ezag/pyeuclid',
+    url='https://github.com/evelios/pyeuclid',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Other Environment',

@@ -7,6 +7,7 @@
 :copyright: Copyright (c) 2006 Alex Holkner <Alex.Holkner@gmail.com>
     .
     Copyright (c) 2011 Eugen Zagorodniy <https://github.com/ezag/>
+    Copyright (c) 2019 Thomas Waters <https://github.com/evelios>
     .
     This library is free software; you can redistribute it and/or modify it
     under the terms of the GNU Lesser General Public License as published by

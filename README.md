@@ -1,9 +1,9 @@
 pyeuclid
 ========
-[![Build Status](https://travis-ci.org/ezag/pyeuclid.svg?branch=master)](https://travis-ci.org/ezag/pyeuclid)
-[![Coverage Status](https://codecov.io/gh/ezag/pyeuclid/branch/master/graph/badge.svg)](https://codecov.io/gh/ezag/pyeuclid)
+[![Build Status](https://travis-ci.org/evelios/pyeuclid.svg?branch=master)](https://travis-ci.org/evelios/pyeuclid)
+[![Coverage Status](https://codecov.io/gh/evelios/pyeuclid/branch/master/graph/badge.svg)](https://codecov.io/gh/evelios/pyeuclid)
 
-2D and 3D maths module for Python
+2D and 3D maths and graphics module for Python
 
 Fork of [pyeuclid](http://code.google.com/p/pyeuclid/) by Alex Holkner.
 The latest pulled upstream revision is
@@ -33,6 +33,7 @@ Copyright &copy; 2006 Alex Holkner
 Copyright &copy; 2011&ndash;2012 Eugen Zagorodniy  
 Copyright &copy; 2011&ndash;2012 Dov Grobgeld  
 Copyright &copy; 2012 Lorenzo Riano  
+Copyright &copy; 2019 Thomas Waters  
 
 This library is free software; you can redistribute it and/or modify it
 under the terms of the GNU Lesser General Public License as published by the
