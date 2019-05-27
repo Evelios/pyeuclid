@@ -11,6 +11,8 @@ The latest pulled upstream revision is
 
 Differences with upstream:
 
+- Added Bezier2 Points
+- Added a Path object
 - Added Stroke and Fill Baseclasses
 - Fixed [#13](http://code.google.com/p/pyeuclid/issues/detail?id=13)
 - Implemented intersection of two circles

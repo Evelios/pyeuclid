@@ -35,6 +35,7 @@ __revision__ = '$Revision$'
 import math
 import operator
 import types
+import collections
 
 try:
     long
@@ -1652,15 +1653,23 @@ class Stroke:
         self.stroke_color = None
 
 class Path(Stroke):
-    def __init__(self, path):
-        assert all(isinstance(p, (Point2, Point3)) for p in path), \
+    def __init__(self, *args):
+        super(Stroke, self).__init__()
+
+        if len(args) == 1:
+            assert isinstance(args[0], collections.Iterable)
+            points = args[0]
+        else:
+            points = args
+
+        assert isinstance(points[0], (Point2, Point3))
+        assert all(isinstance(p, (Point2, Bezier2, Point3)) for p in points[1:]), \
                 "Path must be made up of either Point2 or Point3"
 
-        super(Stroke, self).__init__()
-        self.path = path
+        self.points = points
 
     def __repr__(self):
-        point_strs = list(map(lambda p : str(p), self.path))
+        point_strs = list(map(lambda p : str(p), self.points))
         return 'Path[ ' + ', '.join(point_strs) + ' ]'
 
 def _intersect_point2_circle(P, C):
@@ -1829,6 +1838,29 @@ class Point2(Vector2, Geometry):
         c = _connect_point2_circle(self, other)
         if c:
             return c._swap()
+
+class Bezier2:
+    def __init__(self, p, h1, h2=None):
+        assert isinstance(p, Point2)
+        assert isinstance(h1, Point2)
+        assert h2 is None or isinstance(h2, Point2)
+
+        self.p = p
+        if isinstance(h1, Point2):
+            self.h1 = h1
+        else:
+            self.h1 = p + h1
+
+        self.h2 = h1
+        if h2 is None:
+            self.h2 = h1
+        else:
+            self.h2 = h2
+
+    def __repr__(self):
+        return 'Bezier2(h1=<%.2f, %.2f>, h2=<%.2f, %.2f>, p=<%.2f, %.2f>)' % \
+                (self.h1.x, self.h1.y, self.h2.x, self.h2.y,
+                 self.p.x, self.p.y)
 
 class Line2(Geometry, Stroke):
     __slots__ = ['p', 'v']

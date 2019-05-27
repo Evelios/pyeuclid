@@ -983,11 +983,37 @@ Paths
 
 A path is essentially a list of points that are drawn in a particular order. A
 path is a useful concept for storing a combined set of points. This can be in
-either 2D or 3D space.
+either 2D or 3D space. They can be created from either an iterable object like
+a list or as a comma separated list of objects.
 Example::
 
-        >>> Path([Point2(1, 2), Point2(3, 4), Point2(5, 6)])
-        Path[ Point2(1.00, 2.00), Point2(3.00, 4.00), Point2(5.00, 6.00) ]
+    >>> Path(Point2(1, 2), Point2(3, 4))
+    Path[ Point2(1.00, 2.00), Point2(3.00, 4.00) ]
+    >>> Path([ Point2(1, 2), Point2(3, 4) ])
+    Path[ Point2(1.00, 2.00), Point2(3.00, 4.00) ]
 
+Bezier2
+-------
 
+A path can contain bezier elements. This includes single handle or quadratic
+bezier as well as cubic bezier which are double handle curves. The quadratic
+beziers are just represented as a quadratic bezier curve where both handles are
+at the same location.
+Example::
 
+    >>> p = Point2(1, 2)
+    >>> h1 = Point2(3, 4)
+    >>> Bezier2(p, h1) 
+    Bezier2(h1=<3.00, 4.00>, h2=<3.00, 4.00>, p=<1.00, 2.00>)
+    >>> h2 = Point2(2, 3)
+    >>> Bezier2(p, h1, h2)
+    Bezier2(h1=<3.00, 4.00>, h2=<2.00, 3.00>, p=<1.00, 2.00>)
+
+These bezier curves are best seen when used in conjunction with a path object.
+A path that has a bezier curve must start with a point that isn't a curve
+object because that bezier needs a base point that it is drawn from.
+Example::
+
+    >>> p1 = Point2(0, 0)
+    >>> b = Bezier2(Point2(5, 0), Point2(1, 1), Point2(3, 1))
+    >>> path = Path(p1, b)
