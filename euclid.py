@@ -1651,6 +1651,18 @@ class Stroke:
         self.stroke_width = None
         self.stroke_color = None
 
+class Path(Stroke):
+    def __init__(self, path):
+        assert all(isinstance(p, (Point2, Point3)) for p in path), \
+                "Path must be made up of either Point2 or Point3"
+
+        super(Stroke, self).__init__()
+        self.path = path
+
+    def __repr__(self):
+        point_strs = list(map(lambda p : str(p), self.path))
+        return 'Path[ ' + ', '.join(point_strs) + ' ]'
+
 def _intersect_point2_circle(P, C):
     return abs(P - C.c) <= C.r
 

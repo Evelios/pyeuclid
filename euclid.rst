@@ -115,7 +115,7 @@ setting, and is slower than setting components sequentially anyway.
 Operators
 ---------
 
-Addition and subtraction are supported via operator overloading (note 
+Addition and subtraction are supported via operator overloading (note
 that in-place operators perform faster than those that create a new object)::
 
     >>> v1 = Vector3(1, 2, 3)
@@ -228,7 +228,7 @@ The following methods do *not* alter the original vector or their arguments:
 
 ``angle(other)``
     Return the angle between two vectors.
-    
+
 ``project(other)``
     Return the projection (the component) of the vector on other.
 
@@ -290,9 +290,9 @@ Element access
 Internally each matrix is stored as a set of attributes named ``a`` to ``p``.
 The layout for Matrix3 is::
 
-    # a b c 
-    # e f g 
-    # i j k 
+    # a b c
+    # e f g
+    # i j k
 
 and for Matrix4::
 
@@ -344,7 +344,7 @@ There are class constructors for the most common types of transform.
                      0.00     3.00     0.00     0.00
                      0.00     0.00     4.00     0.00
                      0.00     0.00     0.00     1.00])
-    
+
 ``new_translate(x, y)`` and ``new_translate(x, y, z)``
     The former is defined on **Matrix3**, the latter on **Matrix4**.
     Equivalent to the OpenGL call ``glTranslatef``.
@@ -392,7 +392,7 @@ The following constructors are defined for **Matrix4** only.
     It is not necessary to normalize the axis.  Example::
 
         >>> m = Matrix4.new_rotate_axis(math.pi / 2, Vector3(1.0, 0.0, 0.0))
-        >>> m        
+        >>> m
         Matrix4([    1.00     0.00     0.00     0.00
                      0.00     0.00    -1.00     0.00
                      0.00     1.00     0.00     0.00
@@ -480,7 +480,7 @@ Matrix4 also defines **transpose** (in-place), **transposed** (functional),
 **determinant** and **inverse** (functional) methods.
 
 A **Matrix3** can be multiplied with a **Vector2** or any of the 2D geometry
-objects (**Point2**, **Line2**, **Circle**, etc).  
+objects (**Point2**, **Line2**, **Circle**, etc).
 
 A **Matrix4** can be multiplied with a **Vector3** or any of the 3D geometry
 objects (**Point3**, **Line3**, **Sphere**, etc).
@@ -515,7 +515,7 @@ transforms together directly::
 
 All constructors have an equivalent in-place method.  For **Matrix3**, they
 are ``identity``, ``translate``, ``scale`` and ``rotate``.  For **Matrix4**,
-they are ``identity``, ``translate``, ``scale``, ``rotatex``, ``rotatey``, 
+they are ``identity``, ``translate``, ``scale``, ``rotatex``, ``rotatey``,
 ``rotatez``, ``rotate_axis`` and ``rotate_euler``.  Both **Matrix3** and
 **Matrix4** also have an in-place ``transpose`` method.
 
@@ -645,7 +645,7 @@ The following methods do not alter the quaternion:
 ``conjugated()``
     Returns a quaternion that is the conjugate of the instance.  For
     example::
-        
+
         >>> q1 = Quaternion.new_rotate_axis(math.pi / 2, Vector3(1, 0, 0))
         >>> q1.conjugated()
         Quaternion(real=0.71, imag=<-0.71, -0.00, -0.00>)
@@ -663,7 +663,7 @@ The following methods do not alter the quaternion:
 ``get_matrix()``
     Returns a **Matrix4** implementing the transformation of the quaternion.
     For example::
-        
+
         >>> q1 = Quaternion.new_rotate_axis(math.pi / 2, Vector3(1, 0, 0))
         >>> q1.get_matrix()
         Matrix4([    1.00     0.00     0.00     0.00
@@ -716,14 +716,14 @@ The following methods are also defined:
 
 ``distance(other)``
     Returns the absolute minimum distance to *other*.  Internally this
-    simply returns the length of the result of ``connect``. 
+    simply returns the length of the result of ``connect``.
 
 Line2, Ray2, LineSegment2
 -------------------------
 
 A **Line2** is a line on a 2D plane extending to infinity in both directions;
 a **Ray2** has a finite end-point and extends to infinity in a single
-direction; a **LineSegment2** joins two points.  
+direction; a **LineSegment2** joins two points.
 
 All three classes support the same constructors, operators and methods,
 but may behave differently when calculating intersections etc.
@@ -798,7 +798,7 @@ The following methods are supported:
 
 ``distance(other)``
     Returns the absolute minimum distance to *other*.  Internally this
-    simply returns the length of the result of ``connect``. 
+    simply returns the length of the result of ``connect``.
 
 ``tangent_points(point)``
     Given a **Point2**, returns tuple of two (possibly coincident) **Point2**
@@ -855,14 +855,14 @@ The following methods are also defined:
 
 ``distance(other)``
     Returns the absolute minimum distance to *other*.  Internally this
-    simply returns the length of the result of ``connect``. 
+    simply returns the length of the result of ``connect``.
 
 Line3, Ray3, LineSegment3
 -------------------------
 
 A **Line3** is a line on a 3D plane extending to infinity in both directions;
 a **Ray3** has a finite end-point and extends to infinity in a single
-direction; a **LineSegment3** joins two points.  
+direction; a **LineSegment3** joins two points.
 
 All three classes support the same constructors, operators and methods,
 but may behave differently when calculating intersections etc.
@@ -969,4 +969,25 @@ The following methods are supported:
 ``distance(other)``
     Returns the absolute minimum distance to *other*.  Internally this
     simply returns the length of the result of ``connect``.
-    
+
+----------------------
+Graphics Compatibility
+----------------------
+
+Some of these classes are extended to be able to support underlying data
+structures which are used for graphics programs. This also includes extra data
+structures that are used for graphics applications.
+
+Paths
+-----
+
+A path is essentially a list of points that are drawn in a particular order. A
+path is a useful concept for storing a combined set of points. This can be in
+either 2D or 3D space.
+Example::
+
+        >>> Path([Point2(1, 2), Point2(3, 4), Point2(5, 6)])
+        Path[ Point2(1.00, 2.00), Point2(3.00, 4.00), Point2(5.00, 6.00) ]
+
+
+
