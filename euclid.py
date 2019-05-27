@@ -1642,6 +1642,15 @@ class Geometry:
             return c.length
         return 0.0
 
+class Fill:
+    def __init__():
+        self.fill_color = None
+
+class Stroke:
+    def __init__():
+        self.stroke_width = None
+        self.stroke_color = None
+
 def _intersect_point2_circle(P, C):
     return abs(P - C.c) <= C.r
 
@@ -1809,10 +1818,12 @@ class Point2(Vector2, Geometry):
         if c:
             return c._swap()
 
-class Line2(Geometry):
+class Line2(Geometry, Stroke):
     __slots__ = ['p', 'v']
 
     def __init__(self, *args):
+        super(Stroke, self).__init__()
+
         if len(args) == 3:
             assert isinstance(args[0], Point2) and \
                    isinstance(args[1], Vector2) and \
@@ -2174,10 +2185,12 @@ class Point3(Vector3, Geometry):
         if c:
             return c._swap()
 
-class Line3:
+class Line3(Stroke):
     __slots__ = ['p', 'v']
 
     def __init__(self, *args):
+        super(Stroke, self).__init__()
+
         if len(args) == 3:
             assert isinstance(args[0], Point3) and \
                    isinstance(args[1], Vector3) and \
